@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
+
+        <title>Hello, world!</title>
+        <!-- Required meta tags -->
+
+        <!-- Bootstrap CSS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+
+
+        <link href="https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Noto+Serif+KR:wght@500&display=swap"
+              rel="stylesheet">
+
+        <title>원페이지 쇼핑몰</title>
+        <style>
+            .foto {
+                background-image: url("https://i.ytimg.com/vi/f2Nt3Dsc5HI/maxresdefault.jpg");
+                background-position: center;
+                background-size: cover;
+                width: 600px;
+                height: 400px;
+                margin: auto;
+            }
+
+            .price {
+                font-size: 17px;
+            }
+
+            .title_product {
+                width: 600px;
+                margin: auto;
+                margin-top: 20px;
+
+            }
+
+            .order_box {
+                width: 600px;
+            }
+
+            .mybtn {
+                width: 100px;
+                margin: auto;
+                display: block;
+
+            }
+
+            .wrap {
+                margin: auto;
+                width: 500px;
+            }
+
+            * {
+                font-family: 'Do Hyeon', sans-serif;
+
+
+            }
+
+            .rate {
+                color: deeppink;
+                font-weight: bold;
+            }
+
+
+            .orders {
+                text-align: center;
+
+                width: 600px;
+                  margin: auto;
+                margin-top: 80px;
+            }
+        </style>
+        <script>
+            $(document).ready(function () {
+                $.ajax({
+                    type: "GET",
+                    url: "https://api.manana.kr/exchange/rate.json",
+                    data: {},
+                    success: function (response) {
+                        let rates = response[1]['rate'];
+                        $('#rate-box').text(rates)
+
+                    }
+                })
+
+            });
+
+            function order() {
+                let name = $('#order-name').val();
+                let count = $('#order-count').val();
+                let address = $('#order-address').val();
+                let phone = $('#order-phone').val();
+
+                if (name == '') {
+                    alert('이름을 입력해주세요')
+                } else if (count == '수량을 선택하세요...') {
+                    alert('수량을 선택해주세요')
+                } else if (address == '') {
+                    alert('주소를 입력해주세요')
+                } else if (phone == '') {
+                    alert('전화번호를 입력해주세요')
+                } else {
+                    alert('기적의 양초 주문완료!!!')
+                }
+            }
+
+        </script>
+    </head>
+
+
+    <body>
+        <div class="wrap">
+            <div class="foto"></div>
+            <div class="title_product">
+                <h1>양초를 팝니다 <span class="price">가격:30,000원/개 </span></h1>
+                <p>이 양초는 사실 특별한 힘을 가지고 있어요. 양초를 켜고 소원을 빌면 뭐든지 원하는데로 이뤄지게 됩니다. </p>
+                <p>기적을 사가세요!!</p>
+                <p  class="rate">달러-원 환율: <spand id="rate-box">1,000원 </spand></p>
+            </div>
+            <div class="order_box">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">주문자 이름</span>
+                    </div>
+                    <input id="order-name" type="text" class="form-control" aria-label="Default"
+                           aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">수량 </label>
+                    </div>
+                    <select id="order-count" class="custom-select" id="inputGroupSelect01">
+                        <option selected>수량을 선택하세요...</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">주소 </span>
+                    </div>
+                    <input id="order-address" type="text" class="form-control" aria-label="Default"
+                           aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">전화번호 </span>
+                    </div>
+                    <input id="order-phone" type="text" class="form-control" aria-label="Default"
+                           aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="order">
+                    <button onclick="order()" class="btn btn-danger mybtn">주문하기</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="orders">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">이름</th>
+                    <th scope="col">수량</th>
+                    <th scope="col">주소</th>
+                    <th scope="col">전화번호</th>
+                </tr>
+                </thead>
+                <tbody id="orders-box">
+                <tr>
+                    <td>박르탄</td>
+                    <td>10000</td>
+                    <td>르탄시 코딩구 열심동</td>
+                    <td>010-1234-5678</td>
+                </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
